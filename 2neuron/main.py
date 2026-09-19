@@ -56,8 +56,10 @@ def reluDerivative(num):
 if trainingMode:
     lossBefore = calculateLoss(trainingData)
     print("LOSS BEFORE: ", lossBefore)
+
+    epoches = input("Epoches: ")
     
-    for i in range(0, 10):
+    for i in range(0, epoches):
         for temperature, target in trainingData:
             outputToken = 0
             outputBias = parameters['outputLayer']['bias']
