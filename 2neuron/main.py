@@ -53,11 +53,6 @@ def calculateLoss(trainingData):
 def reluDerivative(num):
     return 1 if num > 0 else 0
 
-if output(int(input('Temperature: '))) > 0.5:
-    print('comfortable')
-else: 
-    print('uncomfortable')
-
 if trainingMode:
     lossBefore = calculateLoss(trainingData)
     print("LOSS BEFORE: ", lossBefore)
@@ -102,3 +97,8 @@ if trainingMode:
             json.dump(parameters, file, indent=2, ensure_ascii=False)
     else:
         print("WRONG TRAINING")
+else: 
+    if output(int(input('Temperature: '))) > 0.5:
+        print('comfortable')
+    else: 
+        print('uncomfortable')
