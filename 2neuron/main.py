@@ -74,6 +74,7 @@ if trainingMode:
             outputToken += outputBias
 
             predictionSigmoid = 1 / (1 + math.e ** -outputToken)
+            deltaOut = 2 * (predictionSigmoid - target) * (predictionSigmoid * (1 - predictionSigmoid))
 
             for i in range(0, 2):
                 outputWeight = parameters['outputLayer']['weights'][i]
@@ -82,14 +83,15 @@ if trainingMode:
                 raw = weight * temperature + bias
                 relu = neuron(i, temperature)
 
-                weightGradient = (2 * (predictionSigmoid - target) * (predictionSigmoid * (1 - predictionSigmoid)) * outputWeight * reluDerivative(raw) * temperature)
-                biasGradient = (2 * (predictionSigmoid - target) * (predictionSigmoid * (1 - predictionSigmoid)) * outputWeight * reluDerivative(raw))
+
+                weightGradient = (deltaOut * outputWeight * reluDerivative(raw) * temperature)
+                biasGradient = (deltaOut * outputWeight * reluDerivative(raw))
 
                 parameters['hiddenLayer'][i]['weight'] = parameters['hiddenLayer'][i]['weight'] - (learningRate * weightGradient)
                 parameters['hiddenLayer'][i]['bias'] = parameters['hiddenLayer'][i]['bias'] - (learningRate * biasGradient)
-                parameters['outputLayer']['weights'][i] = parameters['outputLayer']['weights'][i] - (learningRate * (( (2 * (predictionSigmoid - target)) * (predictionSigmoid * (1 - predictionSigmoid)) ) * relu))
+                parameters['outputLayer']['weights'][i] = parameters['outputLayer']['weights'][i] - (learningRate * (deltaOut * relu))
 
-            parameters['outputLayer']['bias'] = parameters['outputLayer']['bias'] - (learningRate * ( (2 * (predictionSigmoid - target)) * (predictionSigmoid * (1 - predictionSigmoid)) ))
+            parameters['outputLayer']['bias'] = parameters['outputLayer']['bias'] - (learningRate * deltaOut)
 
     lossAfter = calculateLoss(trainingData)
     print("LOSS AFTER: ", lossAfter)
