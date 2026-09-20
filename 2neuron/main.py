@@ -5,26 +5,25 @@ parameters = json.load(open('parameters.json'))
 trainingData = [
     # temperature, comfortable (0 - uncomfortable, 1 - comfortable)
 
-    (0, 0),
+    (28, 0),
     (5, 0),
+    (18, 1),
     (10, 0),
-    (12, 0),
 
     (15, 1),
-    (18, 1),
-    (20, 1),
-    (22, 1),
-    (25, 1),
-
-    (28, 0),
-    (30, 0),
     (32, 0),
-    (35, 0),
+    (20, 1),
+    (0, 0),
+    (30, 0),
+    (22, 1),
     (40, 0),
+    (12, 0),
+
+    (35, 0),
+    (25, 1),
 ]
 
 learningRate = 0.01
-trainingMode = True
 
 def neuron(i, inputToken):
     neuronWeight = parameters['hiddenLayer'][i]['weight']
@@ -53,11 +52,16 @@ def calculateLoss(trainingData):
 def reluDerivative(num):
     return 1 if num > 0 else 0
 
+trainingMode = -1
+
+while trainingMode not in range(0, 2):
+    trainingMode = int(input("Training? 0 or 1: "))
+
 if trainingMode:
     lossBefore = calculateLoss(trainingData)
     print("LOSS BEFORE: ", lossBefore)
 
-    epoches = input("Epoches: ")
+    epoches = int(input("Epoches: "))
     
     for i in range(0, epoches):
         for temperature, target in trainingData:
