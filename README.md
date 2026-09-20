@@ -20,7 +20,7 @@ Written for studying AI and ML
 >- Optimizer: Stochastic Gradient Descent (batch size = 1)
 
 ### worth-to-run
->#### Provide the temperature and weather to find out is it worth to go running (uncomfortable / comfortable).
+>#### Provide the temperature and weather to find out is it worth to go running (dont run / run).
 >- **2 input neurons**
 >- **3 hidden neurons**
 >- **1 output neuron**
