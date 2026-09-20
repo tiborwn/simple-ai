@@ -19,12 +19,13 @@ Written for studying AI and ML
 >- Loss: Mean Squared Error
 >- Optimizer: Stochastic Gradient Descent (batch size = 1)
 
-### worth-to-run
->#### Provide the temperature and weather to find out is it worth to go running (dont run / run).
->- **2 input neurons**
->- **3 hidden neurons**
->- **1 output neuron**
+### shape-classifier
+>#### Classify a 8x8 image as a vertical line, horizontal line, plus, or X..
+>- **64 input neurons**
+>- **16 neurons in first hidden layer**
+>- **8 neurons in second hidden layer**
+>- **4 output neurons**
 >- Hidden activation: ReLU
->- Output activation: Sigmoid
->- Loss: Mean Squared Error
+>- Output activation: Softmax
+>- Loss: Cross-Entropy Error
 >- Optimizer: Stochastic Gradient Descent (batch size = 1)
