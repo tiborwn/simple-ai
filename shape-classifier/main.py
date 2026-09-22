@@ -18,10 +18,12 @@ for line in np.array(inputImage):
 def neuron(layerIndex, neuronIndex, inputTokens):
     neuronOutput = 0
 
-    for k, v in enumerate(inputTokens):
-        neuronOutput += parameters[layerIndex][neuronIndex]['weights'][k] * v
+    parametersList = list(parameters.values())
 
-    neuronOutput += parameters[layerIndex][neuronIndex]['bias']
+    for k, v in enumerate(inputTokens):
+        neuronOutput += parametersList[layerIndex][neuronIndex]['weights'][k] * v
+
+    neuronOutput += parametersList[layerIndex][neuronIndex]['bias']
 
     return max(0, neuronOutput) if layerIndex != 2 else neuronOutput
 
